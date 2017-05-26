@@ -3,6 +3,7 @@ package godebug
 import (
 	"bufio"
 	"fmt"
+	"github.com/davecgh/go-spew/spew"
 	"os"
 	"reflect"
 	"strings"
@@ -346,9 +347,10 @@ func waitForInput(scope *Scope, line int) {
 						}
 						ifc := r.Interface()
 						if _, ok := ifc.(*eval.ConstNumber); ok {
-							s[i] = fmt.Sprintf("%v", ifc)
+							s[i] = spew.Sdump(ifc)
 						} else {
-							s[i] = fmt.Sprintf("%#v", ifc)
+							s[i] = spew.Sdump(ifc)
+
 						}
 					}
 					fmt.Println(strings.Join(s, ", "))
